@@ -109,7 +109,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
      */
     public function testAuthenticateSuccessWithTreatment()
     {
-        $this->authAdapter = new Adapter\DbTable($this->db, $this->tableName, 'username', 'password', '?');
+        $this->authAdapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->db, $this->tableName, 'username', 'password', '?');
         $this->authAdapter->setIdentity('my_username');
         $this->authAdapter->setCredential('my_password');
         $result = $this->authAdapter->authenticate();
@@ -249,7 +249,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
     public function testCatchExceptionNoTable()
     {
         $this->setExpectedException('Zend\Authentication\Adapter\DbTable\Exception\RuntimeException', 'A table must be supplied for');
-        $adapter = new Adapter\DbTable($this->db);
+        $adapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->db);
         $adapter->authenticate();
     }
 
@@ -262,7 +262,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
             'Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
             'An identity column must be supplied for the'
         );
-        $adapter = new Adapter\DbTable($this->db, 'users');
+        $adapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->db, 'users');
         $adapter->authenticate();
     }
 
@@ -275,7 +275,7 @@ class CredentialTreatmentAdapterDb2Test extends \PHPUnit_Framework_TestCase
             'Zend\Authentication\Adapter\DbTable\Exception\RuntimeException',
             'A credential column must be supplied'
         );
-        $adapter = new Adapter\DbTable($this->db, 'users', 'username');
+        $adapter = new Adapter\DbTable\CredentialTreatmentAdapter($this->db, 'users', 'username');
         $adapter->authenticate();
     }
 
